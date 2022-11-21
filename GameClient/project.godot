@@ -16,6 +16,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
+Save="*res://save/save.gd"
 Server="*res://server/server.gd"
 
 [global]
