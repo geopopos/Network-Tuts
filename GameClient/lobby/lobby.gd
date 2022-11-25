@@ -4,6 +4,7 @@ onready var player_name = $CenterContainer/VBoxContainer/GridContainer/NameTextB
 onready var selected_IP = $CenterContainer/VBoxContainer/GridContainer/IPTextBox
 onready var selected_port = $CenterContainer/VBoxContainer/GridContainer/PortTextBox
 onready var waiting_room = $WaitingRoom
+onready var ready_btn = $WaitingRoom/CenterContainer/VBoxContainer/ReadyBtn
 
 func _ready():
 	player_name.text = Save.save_data["Player_name"]
@@ -23,3 +24,12 @@ func _on_NameTextBox_text_changed(new_text):
 
 func show_waiting_room():
 	waiting_room.popup_centered()
+
+
+
+	
+
+
+func _on_ReadyBtn_pressed():
+	Server.load_game()
+	ready_btn.disabled = true

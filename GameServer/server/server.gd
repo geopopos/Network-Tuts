@@ -5,6 +5,7 @@ var port = 3234
 var max_players = 4
 
 var players = {}
+var ready_players = 0
 
 func _ready():
 	start_server()
@@ -27,3 +28,10 @@ remote func send_player_info(id, player_data):
 	players[id] = player_data
 	rset("players", players)
 	rpc("update_waiting_room")
+
+remote func load_world():
+	ready_players += 1
+	if players.size() > 1 and ready_players >= players.size():
+		rpc("start_game")
+		var world = preload("res://world/world.tscn").instance()
+		get_tree().get_root().add_child(world)
