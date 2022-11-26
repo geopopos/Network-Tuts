@@ -19,7 +19,6 @@ func _physics_process (delta):
 		camera.current = true
 		player_label.rect_position = Vector2(position.x - 40, position.y - 60)
 		var input_vector = get_input_vector()
-		print(input_vector)
 		apply_movement(input_vector, delta)
 		apply_friction(input_vector, delta)
 		motion = move_and_slide(motion)
