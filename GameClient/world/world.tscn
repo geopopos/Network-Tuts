@@ -61,6 +61,12 @@ position = Vector2( 652, 432 )
 [node name="Position2D2" type="Position2D" parent="EnemySpawn"]
 position = Vector2( 945, 591 )
 
+[node name="Position2D4" type="Position2D" parent="EnemySpawn"]
+position = Vector2( 1168, 610 )
+
+[node name="Position2D5" type="Position2D" parent="EnemySpawn"]
+position = Vector2( 1199, 106 )
+
 [node name="EnemySpawnTimer" type="Timer" parent="."]
 wait_time = 3.0
 autostart = true
