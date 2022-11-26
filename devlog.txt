@@ -1,0 +1,2 @@
+[] update server to handle multiple player lobbies (once game starts new joinable lobby is created)
+[x] update not network master players to be a different color with self_modulate

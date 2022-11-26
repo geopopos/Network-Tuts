@@ -26,6 +26,7 @@ func _physics_process (delta):
 
 remote func update_remote_player(transform):
 	if not is_network_master():
+		modulate = Color(0, 1, 0)
 		global_transform = transform
 		player_label.rect_position = Vector2(position.x - 40, position.y - 60)
 
@@ -45,4 +46,5 @@ func apply_friction( input_vector, delta):
 		motion = motion.move_toward(Vector2. ZERO, FRICTION * delta)
 
 func set_player_name():
-	player_label.text = Server.players[int(name)]["Player_name"]
+#	player_label.text = Server.players[int(name)]["Player_name"]
+	pass
