@@ -1,3 +1,10 @@
 [x] update server to handle multiple player lobbies (once game starts new joinable lobby is created)
 [x] update not network master players to be a different color with self_modulate
+
 [] move collission processing to server
+
+11-26-2022
+updated multiple-lobby functionality.
+Previous set up was not creating separate worlds to manage player state, so it got wonky.
+I set up the code to set up separate worlds for now own
+I set up an rpc call so that the world name in the server is the same as the one in the client

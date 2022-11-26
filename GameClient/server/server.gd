@@ -12,6 +12,8 @@ var local_player_id = 0
 sync var players = {}
 sync var player_data = {}
 
+var world 
+
 func _ready():
 	get_tree().connect("network_peer_connected", self, "_player_connected")
 	get_tree().connect("network_peer_disconnected", self, "_player_disconnected")
@@ -52,10 +54,19 @@ func load_game():
 	rpc_id(1, "load_world", local_player_id)
 	
 sync func start_game():
-	var world = preload("res://world/world.tscn").instance()
+	print("start_game called")
+	world = preload("res://world/world.tscn").instance()
 	get_tree().get_root().add_child(world)
 	get_tree().get_root().get_node("Lobby").queue_free()
+	rpc_id(1, "spawn_players", local_player_id)
 
 remote func set_lobby_id(id):
 	lobby_id = id
 	print(lobby_id)
+	
+func spawn_enemies():
+	rpc_id(1, "spawn_enemies", Server.local_player_id)
+	
+remote func set_world_name(world_name):
+	print(world_name)
+	world.name = world_name

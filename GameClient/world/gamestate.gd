@@ -12,7 +12,6 @@ onready var enemies = $Enemies
 
 func _ready():
 	possible_destinations = destinations.get_children()
-	rpc_id(1, "spawn_players", Server.local_player_id)
 	
 	
 remote func spawn_player(id):
@@ -32,4 +31,4 @@ remote func spawn_enemy(idx, enemy_name):
 
 
 func _on_EnemySpawnTimer_timeout():
-	rpc_id(1, "spawn_enemies", Server.local_player_id)
+	Server.spawn_enemies()

@@ -1,5 +1,7 @@
 extends Node
 
+const PLAYER = preload("res://player/player.tscn")
+
 var network = NetworkedMultiplayerENet.new()
 var port = 3234
 var max_players = 4
@@ -47,8 +49,30 @@ remote func load_world(id):
 	var lobby_id = player_lobby[id]
 	lobbies[lobby_id]["ready_players"] += 1
 	if lobbies[lobby_id]["players"].size() > 1 and lobbies[lobby_id]["ready_players"] >= lobbies[lobby_id]["players"].size():
+		for p_id in lobbies[lobby_id]["players"]:
+			rpc_id(p_id, "start_game")
+		var world = preload("res://world/world.tscn").instance()
+		lobbies[lobby_id]["world"] = world
+		world.name = "World" + str(lobby_id)
+		for p_id in lobbies[lobby_id]["players"]:
+			print(world.name)
+			rpc_id(p_id, "set_world_name", world.name)
+		get_tree().get_root().add_child(world)
 		current_lobby_id += 1
 		lobbies[current_lobby_id] = lobby_template
-		rpc("start_game")
-		var world = preload("res://world/world.tscn").instance()
-		get_tree().get_root().add_child(world)
+
+remote func spawn_players(id):
+	print("spawn_players")
+	var player = PLAYER.instance()
+	player.name = str(id)
+	var lobby_id = player_lobby[id]
+	var world = lobbies[lobby_id]["world"]
+	print("lobby id: " + str(lobby_id))
+	print("World Name: " + world.name)
+	world.get_node("Players").add_child(player)
+	world.spawn_players(id, lobby_id)
+	
+remote func spawn_enemies(id):
+	var lobby_id = player_lobby[id]
+	var world = lobbies[lobby_id]["world"]
+	world.spawn_enemies(id)
