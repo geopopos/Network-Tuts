@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/sprites/square.png" type="Texture" id=1]
+[ext_resource path="res://world/gamestate.gd" type="Script" id=2]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -33,6 +34,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 0/z_index = 0
 
 [node name="World" type="Node2D"]
+script = ExtResource( 2 )
 
 [node name="TileMap" type="TileMap" parent="."]
 self_modulate = Color( 0.239216, 0.27451, 0.65098, 1 )
@@ -43,4 +45,5 @@ tile_data = PoolIntArray( -458713, 0, 0, -458712, 0, 0, -393181, 0, 0, -393180, 
 
 [node name="Players" type="Node" parent="."]
 
-[node name="Position2D" type="Position2D" parent="."]
+[node name="PlayerSpawn" type="Position2D" parent="."]
+position = Vector2( 176, 417 )
