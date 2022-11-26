@@ -24,9 +24,6 @@ func _on_NameTextBox_text_changed(new_text):
 
 func show_waiting_room():
 	waiting_room.popup_centered()
-
-
-
 	
 
 

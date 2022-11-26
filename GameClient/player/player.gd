@@ -5,6 +5,7 @@ const ACCELERATION = 300
 const FRICTION = 200
 
 var motion = Vector2. ZERO
+var lobby_id
 
 onready var player_label = $Label
 onready var camera = $Camera2D
@@ -22,7 +23,7 @@ func _physics_process (delta):
 		apply_movement(input_vector, delta)
 		apply_friction(input_vector, delta)
 		motion = move_and_slide(motion)
-		rpc_unreliable_id(1, "update_player", global_transform)
+		rpc_unreliable_id(1, "update_player", Server.local_player_id, global_transform)
 
 remote func update_remote_player(transform):
 	if not is_network_master():
@@ -46,5 +47,4 @@ func apply_friction( input_vector, delta):
 		motion = motion.move_toward(Vector2. ZERO, FRICTION * delta)
 
 func set_player_name():
-#	player_label.text = Server.players[int(name)]["Player_name"]
-	pass
+	player_label.text = Server.players[int(name)]["Player_name"]

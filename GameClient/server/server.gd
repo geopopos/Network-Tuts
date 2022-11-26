@@ -7,6 +7,7 @@ var network = NetworkedMultiplayerENet.new()
 var selected_IP
 var selected_port
 
+var lobby_id
 var local_player_id = 0
 sync var players = {}
 sync var player_data = {}
@@ -48,9 +49,13 @@ sync func update_waiting_room():
 	get_tree().call_group("WaitingRoom", "refresh_players", players)
 	
 func load_game():
-	rpc_id(1, "load_world")
+	rpc_id(1, "load_world", local_player_id)
 	
 sync func start_game():
 	var world = preload("res://world/world.tscn").instance()
 	get_tree().get_root().add_child(world)
 	get_tree().get_root().get_node("Lobby").queue_free()
+
+remote func set_lobby_id(id):
+	lobby_id = id
+	print(lobby_id)
